@@ -5,15 +5,18 @@
  */
 package controller;
 
+import Dao.LoginDao;
 import Dao.NinosDao;
 import conexion.Conexion;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.ApoderadosBean;
 import modelo.NinosBean;
+import modelo.UsuarioBean;
 
 /**
  *
@@ -54,8 +57,13 @@ public class NinosServlet extends HttpServlet {
             throws ServletException, IOException {
         Conexion conn = new Conexion();
         NinosDao ninod = new NinosDao(conn);
-        int id=Integer.parseInt(request.getParameter("id_apoderado"));
-        ApoderadosBean apoderado=new ApoderadosBean()
+        String usuario=request.getParameter("apoderado");
+        UsuarioBean usuariob= new UsuarioBean();
+        usuariob.setUsuario(usuario);
+        LoginDao login=new LoginDao(conn);
+        ApoderadosBean apoderado=new ApoderadosBean();
+        apoderado.setId_usuario(login.consultarId_Usuario(usuariob).getId_usuario());
+        
         List<NinosBean> lista=ninod.mostrarNinos(apoderado)
     }
 

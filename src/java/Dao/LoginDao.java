@@ -19,6 +19,26 @@ public class LoginDao {
 
     ResultSet rs;
     PreparedStatement ps;
+    
+    public UsuarioBean consultarId_Usuario(UsuarioBean usuario) {
+        String sql = "select id_usuario from usuarios where usuario=?";
+
+        try {
+            ps = conn.conectar().prepareStatement(sql);
+            ps.setString(1, usuario.getUsuario());
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                usuario.setId_usuario(rs.getInt(1));
+               
+            }
+
+            return usuario;
+        } catch (Exception e) {
+            
+            return null;
+        }
+    }
 
     public boolean consultarUsuario(UsuarioBean usuario) {
         String sql = "select * from usuarios where usuario=?";

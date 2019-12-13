@@ -10,8 +10,8 @@
         font-family: 'Calistoga', cursive;
         background-image: url('imagenes/menu3.jpg');
         height: 400px;
-       
-       
+
+
 
 
     }
@@ -49,9 +49,11 @@
                 <li class="nav-item ">
                     <a class="nav-link active" href="cliente.jsp" style="color: #fff;">Tio Juanito</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: #fff;" href="#">Perfil</a>
+
+                <li class="nav-item" style="right: 50px">
+                    <a class="nav-link" style="color: #fff;" href="#">${usuario}</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" style="color: #fff;" href="#">Contrato</a>
                 </li>
@@ -59,18 +61,18 @@
                     <a class="nav-link" style="color: #fff;" href="#">Contáctanos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: #fff;" href="hijos.jsp">hijos</a>
+                    <a class="nav-link" style="color: #fff;" href="ninos?action=mostrarNinos&usuario=${usuario}">hijos</a>
                 </li>
-          
+
                 <li class="nav-item" style="right: 50px">
-                    
+
                     <a class="nav-link" style="color: #fff;" href="#">${usuario}</a>
                 </li>
                 <li class="nav-item" style="right: 50px">
-                    
+
                     <a class="nav-link" style="color: #fff;" href="login?action=cerrar">Salir</a>
                 </li>
-                
+
             </ul>
         </div>
     </div>
