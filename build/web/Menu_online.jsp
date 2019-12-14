@@ -50,8 +50,8 @@
                     <a class="nav-link active" href="cliente.jsp" style="color: #fff;">Tio Juanito</a>
                 </li>
 
-                <li class="nav-item" style="right: 50px">
-                    <a class="nav-link" style="color: #fff;" href="#">${usuario}</a>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: #fff;" href="ninos?action=mostrarNinos&usuario=${usuario}">hijos</a>
                 </li>
 
                 <li class="nav-item">
@@ -60,9 +60,7 @@
                 <li class="nav-item">
                     <a class="nav-link" style="color: #fff;" href="#">Contáctanos</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: #fff;" href="ninos?action=mostrarNinos&usuario=${usuario}">hijos</a>
-                </li>
+                
 
                 <li class="nav-item" style="right: 50px">
 

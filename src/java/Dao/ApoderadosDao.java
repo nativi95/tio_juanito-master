@@ -27,20 +27,21 @@ public class ApoderadosDao {
     PreparedStatement ps;
 
     public ApoderadosBean mostrarApoderadoById_usuario(UsuarioBean usuario) {
-        ApoderadosBean apoderado;
+        ApoderadosBean apoderado = new ApoderadosBean();
         String sql = "select * from apoderados where id_usuario=?";
         try {
-            ps=conn.conectar().prepareStatement(sql);
+            ps = conn.conectar().prepareStatement(sql);
             ps.setInt(1, usuario.getId_usuario());
-            rs=ps.executeQuery();
-            
-            while(rs.next()){
-            apoderado=new ApoderadosBean(rs.getInt(1));
-            apoderado.setNombre(rs.getString(2));
-            
-            apoderado.setApellido(rs.getString(3));
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                apoderado = new ApoderadosBean(rs.getInt(1));
+                apoderado.setNombre(rs.getString(2));
+                apoderado.setApellido(rs.getString(3));
+                apoderado.setDui(rs.getString(4));
+                apoderado.setTelefono(rs.getString(5));
             }
-            
+
             return apoderado;
         } catch (Exception e) {
 

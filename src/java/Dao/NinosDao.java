@@ -26,10 +26,12 @@ public class NinosDao {
                 + "from\n"
                 + "ninos n\n"
                 + "inner join apoderados a on a.id_apoderado=n.id_apoderado\n"
-                + "where a.id_apoderado=? and n.estado='activo'";
+                + "where a.id_apoderado=? and n.estado='activo'"
+                + "ORDER BY n.id_nino DESC";
         try {
             ps = conn.conectar().prepareStatement(sql);
             ps.setInt(1, apoderado.getId_apoderado());
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 NinosBean nino = new NinosBean(rs.getInt(1));
@@ -37,14 +39,13 @@ public class NinosDao {
                 nino.setApellido(rs.getString(3));
                 nino.setDisponibilidad(rs.getBoolean(4));
                 nino.setDirecion(rs.getString(5));
-                if (rs.getTime(6) != null && rs.getTime(7)!= null) {
+                if (rs.getTime(6) != null && rs.getTime(7) != null) {
                     nino.setSalida(rs.getTime(6).toLocalTime());
                     nino.setLlegada(rs.getTime(7).toLocalTime());
                 } else {
                     nino.setLlegada(LocalTime.of(0, 0));
                     nino.setSalida(LocalTime.of(0, 0));
                 }
-                
 
                 list.add(nino);
             }
@@ -78,10 +79,29 @@ public class NinosDao {
 
     public boolean actualizarNino(NinosBean nino) {
 
-        String sql = "UPDATE colegios set nombre=?, direcion=?, foto=? WHERE id_colegio=?";
+        String sql = "UPDATE ninos set nombre=?, apellido=?, direcion=?, disponibilidad=? WHERE id_nino=? and estado='activo'";
         try {
             ps = conn.conectar().prepareStatement(sql);
+            ps.setInt(5, nino.getId_nino());
+            ps.setString(1, nino.getNombre());
+            ps.setString(2, nino.getApellido());
+            ps.setBoolean(4, nino.isDisponibilidad());
+            ps.setString(3, nino.getDirecion());
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println(ps + "\n " + e);
+            return false;
+        }
+    }
+    
+    public boolean eliminarNino(NinosBean nino) {
 
+        String sql = "UPDATE ninos set estado='inactivo' WHERE id_nino=?";
+        try {
+            ps = conn.conectar().prepareStatement(sql);
+            ps.setInt(1, nino.getId_nino());
+            System.out.println(ps);
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
